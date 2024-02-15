@@ -31,6 +31,7 @@ public class Character : MonoBehaviour
         chest.velocity = horVel;
         if (horVel.x != 0)
         {
+            speed -= Time.deltaTime;
             if (horVel.x > 0)
             {
                 animator.Play("Walk");

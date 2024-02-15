@@ -6,11 +6,12 @@ TagManager:
   tags:
   - Broom
   - Ball
+  - Ground
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - 
