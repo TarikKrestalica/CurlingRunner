@@ -7,6 +7,7 @@ TagManager:
   - Broom
   - Ball
   - Ground
+  - Character
   layers:
   - Default
   - TransparentFX

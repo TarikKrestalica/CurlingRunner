@@ -14,7 +14,7 @@ public class Character : MonoBehaviour
     // Jumping mechanic
     [Range(0, 10000)]
     [SerializeField] float jumpPower;
-    bool isJumping = false;
+    bool isJumping = true;
 
     [Header("Grounding")]
     [SerializeField] RectTransform groundCheckTransform;
@@ -22,29 +22,12 @@ public class Character : MonoBehaviour
 
     // To Dos
         // Sliding mechanic
-        // Player legs clipping through ground
         // Fix up ragdoll parts in terms of their rotation
     private void Update()
     {
-        float horInput = Input.GetAxis("Horizontal");
-        Vector2 horVel = this.transform.right * horInput * speed * Time.deltaTime * 100;
+        Vector2 horVel = this.transform.right * speed * Time.deltaTime * 100;
         chest.velocity = horVel;
-        if (horVel.x != 0)
-        {
-            speed -= Time.deltaTime;
-            if (horVel.x > 0)
-            {
-                animator.Play("Walk");
-            }
-            else
-            {
-                animator.Play("WalkBack");
-            }
-        }
-        else
-        {
-            animator.Play("0");
-        }
+        animator.Play("Walk");
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -65,5 +48,17 @@ public class Character : MonoBehaviour
             chest.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             isJumping = !isJumping;
         }
+        
     }
+
+    public void AddSpeed(float factor)
+    {
+        speed += factor;
+    }
+
+    public void LoseSpeed(float factor)
+    {
+        speed -= factor;
+    }
+
 }

@@ -35,6 +35,22 @@ public class GameManager : MonoBehaviour
 
     private Broom m_broom;
 
+    public static Character character
+    {
+        get
+        {
+            if (gameManager.m_character == null)
+            {
+                gameManager.m_character = GameObject.FindGameObjectWithTag("Character").GetComponent<Character>();
+            }
+
+            return gameManager.m_character;
+        }
+    }
+
+    private Character m_character;
+   
+
     private void Awake()
     {
         if(gameManager)

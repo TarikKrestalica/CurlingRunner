@@ -25,14 +25,6 @@ public class Ball : MonoBehaviour
         }
 
         rb.velocity = new Vector2(speed, rb.velocity.y);
-        if (!GameManager.broom.ContactWithBroom())
-        {
-            speed -= Time.deltaTime;
-        }
-        else
-        {
-            speed -= Time.deltaTime * 1.2f;
-        }
     }
 
     public float GetCurrentSpeed()

@@ -1,37 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Broom : MonoBehaviour
 {
-    private bool clicked;
-
-    private void Start()
+    // Click on it to sweep
+    public void Sweep(BaseEventData data)
     {
-        clicked = false;
+        GameManager.character.LoseSpeed(Time.deltaTime * 5);
     }
-
-    public bool ContactWithBroom()
-    {
-        return clicked;
-    }
-
-    public void SetContactWithBroom(bool toggle)
-    {
-        clicked = toggle;
-    }
-
-    public void ApplyRotationToBall(float value)
-    {
-        if(GameManager.ball.GetCurrentSpeed() < 0)
-        {
-            return;
-        }
-
-        Vector3 curPosition = this.transform.parent.position;
-        curPosition.y -= Time.deltaTime * value;
-        this.transform.parent.position = curPosition;
-        
-    }
-
 }
