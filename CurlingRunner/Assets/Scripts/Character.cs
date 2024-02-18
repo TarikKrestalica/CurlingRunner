@@ -12,26 +12,29 @@ public class Character : MonoBehaviour
     [SerializeField] float speed;
 
     // Jumping mechanic
-    [Range(0, 10000)]
+    [Range(0, 100)]
     [SerializeField] float jumpPower;
-    bool isJumping = true;
+    bool isJumping = false;
 
     [Header("Grounding")]
     [SerializeField] RectTransform groundCheckTransform;
     [SerializeField] LayerMask playerMask;
 
+    private string result = "ParticipationTrophy";
+
     // To Dos
-        // Sliding mechanic
-        // Fix up ragdoll parts in terms of their rotation
+    // Sliding mechanic
+    // Fix up ragdoll parts in terms of their rotation
     private void Update()
     {
-        Vector2 horVel = this.transform.right * speed * Time.deltaTime * 100;
-        chest.velocity = horVel;
-        animator.Play("Walk");
+        if (speed < 0)
+            return;
 
+        this.transform.Translate(this.transform.right * speed * Time.deltaTime * Time.deltaTime);
+        animator.Play("Walk");
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            isJumping = !isJumping;
+            isJumping = true;
         }
     }
 
@@ -43,12 +46,12 @@ public class Character : MonoBehaviour
     private void FixedUpdate()
     {
         // need to fix this
-        if (IsGrounded() && !isJumping)
+        if (IsGrounded() && isJumping == true)
         {
             chest.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-            isJumping = !isJumping;
+            isJumping = false;
         }
-        
+
     }
 
     public void AddSpeed(float factor)
@@ -61,4 +64,18 @@ public class Character : MonoBehaviour
         speed -= factor;
     }
 
+    public float GetSpeed()
+    {
+        return speed;
+    }
+
+    public string GetResult()
+    {
+        return result;
+    }
+
+    public void SetResult(string text)
+    {
+        result = text;
+    }
 }

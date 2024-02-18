@@ -49,7 +49,22 @@ public class GameManager : MonoBehaviour
     }
 
     private Character m_character;
-   
+
+    public static TargetManager targetManager
+    {
+        get
+        {
+            if (gameManager.m_targetManager == null)
+            {
+                gameManager.m_targetManager = GameObject.FindGameObjectWithTag("TargetManager").GetComponent<TargetManager>();
+            }
+
+            return gameManager.m_targetManager;
+        }
+    }
+
+    private TargetManager m_targetManager;
+
 
     private void Awake()
     {
@@ -60,6 +75,21 @@ public class GameManager : MonoBehaviour
 
         gameManager = this;
         DontDestroyOnLoad(gameManager);
+        targetManager.gameObject.SetActive(false);
+
+    }
+
+    private void Update()
+    {
+        if(character.GetSpeed() <= 0 && PlacementManager.resultingPlace == "")  // Character has come to a full stop!
+        {
+            if(!targetManager.gameObject.activeInHierarchy)
+            {
+                targetManager.gameObject.SetActive(true);
+                gameManager.m_targetManager.FindResult();
+            }
+            
+        }
     }
 
 }

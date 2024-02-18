@@ -8,6 +8,11 @@ TagManager:
   - Ball
   - Ground
   - Character
+  - BlueLevel
+  - WhiteLevel
+  - RedLevel
+  - BullsEye
+  - TargetManager
   layers:
   - Default
   - TransparentFX
