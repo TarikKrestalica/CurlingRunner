@@ -17,5 +17,12 @@ public class VelocityControl : MonoBehaviour
                 GameManager.character.LoseSpeed(Time.deltaTime);
             }
         }
+
+        // Completely dampen the speed!
+        if(collision.gameObject.tag == "Wall")
+        {
+            float startingSpeed = GameManager.character.GetStartingSpeed();
+            GameManager.character.LoseSpeed(Time.deltaTime * startingSpeed * 3);
+        }
     }
 }

@@ -10,6 +10,7 @@ public class Character : MonoBehaviour
 
     [Range(0, 1000)]
     [SerializeField] float speed;
+    float startingSpeed;
 
     // Jumping mechanic
     [Range(0, 200)]
@@ -21,6 +22,11 @@ public class Character : MonoBehaviour
     [SerializeField] LayerMask playerMask;
 
     private bool isOnFallBox = false;
+
+    private void Start()
+    {
+        startingSpeed = speed;
+    }
 
     // To Dos
     // Sliding mechanic
@@ -67,6 +73,11 @@ public class Character : MonoBehaviour
     public float GetSpeed()
     {
         return speed;
+    }
+
+    public float GetStartingSpeed()
+    {
+        return startingSpeed;
     }
 
     public bool IsOnFallBox()
