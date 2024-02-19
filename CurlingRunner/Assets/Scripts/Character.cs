@@ -20,8 +20,7 @@ public class Character : MonoBehaviour
     [SerializeField] RectTransform groundCheckTransform;
     [SerializeField] LayerMask playerMask;
 
-    private string result = "Participation Trophy";
-    private bool isWalled = false;
+    private bool isOnFallBox = false;
 
     // To Dos
     // Sliding mechanic
@@ -30,12 +29,6 @@ public class Character : MonoBehaviour
     {
         if (speed < 0)
             return;
-
-        if (this.transform.position.y < -50)
-        {
-            this.transform.Translate(this.transform.right * 0);
-            return;
-        }
 
         this.transform.Translate(this.transform.right * speed * Time.deltaTime);
         animator.Play("Walk");
@@ -47,17 +40,14 @@ public class Character : MonoBehaviour
 
     public bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheckTransform.position, 1f, playerMask);
+        return Physics2D.OverlapCircle(groundCheckTransform.position, 1.5f, playerMask);
     }
 
     private void FixedUpdate()
     {
-        // Cast a ray straight down.
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up);
-        Debug.DrawRay(hit.point, -Vector2.up);
-        // need to fix this
         if (IsGrounded() && isJumping == true)
         {
+            Debug.Log("Jumping");
             chest.AddForce(Vector2.up * jumpPower * 5, ForceMode2D.Impulse);
             isJumping = false;
         }
@@ -79,25 +69,17 @@ public class Character : MonoBehaviour
         return speed;
     }
 
-    public string GetResult()
+    public bool IsOnFallBox()
     {
-        return result;
+        return isOnFallBox;
     }
 
-    public void SetResult(string text)
+    public void SetOnFallBox(bool toggle)
     {
-        result = text;
+        isOnFallBox = toggle;
     }
 
-    public void SetWalled(bool toggle)
-    {
-        isWalled = toggle;
-    }
 
-    public bool GetWalled()
-    {
-        return isWalled;
-    }
 }
 
 

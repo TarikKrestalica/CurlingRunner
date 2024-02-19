@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlacementManager : MonoBehaviour
 {
-    public static string resultingPlace = ""; 
-    private void OnCollisionStay2D(Collision2D collision)
+    private static string resultingPlace = ""; 
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (GameManager.character.GetSpeed() > 0)
+        if (GameManager.character.GetSpeed() < 0)
             return;
 
         if (collision.gameObject.tag != "WhiteLevel" && collision.gameObject.tag != "BlueLevel" && collision.gameObject.tag != "RedLevel" && collision.gameObject.tag != "BullsEye")
@@ -15,17 +15,27 @@ public class PlacementManager : MonoBehaviour
 
         if (collision.gameObject.tag == "WhiteLevel" || collision.gameObject.tag == "BlueLevel")
         {
-            resultingPlace = "Bronze";
+            SetResultingPlace("Bronze");
         }
         else if (collision.gameObject.tag == "RedLevel")
         {
-            resultingPlace = "Silver";
+            SetResultingPlace("Silver");
         }
         else if (collision.gameObject.tag == "BullsEye")
         {
-            resultingPlace = "Gold";
+            SetResultingPlace("Gold");
         }
-
-        GameManager.character.SetResult(resultingPlace);
     }
+
+    public static string GetResultingPlace()
+    {
+        return resultingPlace;
+    }
+
+    public static void SetResultingPlace(string place)
+    {
+        resultingPlace = place;
+    }
+
+
 }

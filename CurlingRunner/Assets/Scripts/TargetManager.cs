@@ -9,6 +9,7 @@ public class TargetManager : MonoBehaviour
     [SerializeField] Image imageComponent;
     [SerializeField] TMP_Text resultText;
     [SerializeField] List<Sprite> ranks;
+    [SerializeField] GameObject endOfGame;
 
     public void SetImage(Sprite image)
     {
@@ -22,7 +23,12 @@ public class TargetManager : MonoBehaviour
 
     public void FindResult()
     {
-        string result = GameManager.character.GetResult();
+        endOfGame.SetActive(true);
+        string result = PlacementManager.GetResultingPlace();
+        if(result == "")
+        {
+            result = "Participation Trophy";
+        }
         resultText.text = result;
         Sprite resultingTrophy = GetTrophy(result);
         SetImage(resultingTrophy);

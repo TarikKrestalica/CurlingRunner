@@ -69,11 +69,10 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if(gameManager)
+        if(gameManager == null)
         {
             Destroy(gameManager);
         }
-
         gameManager = this;
         DontDestroyOnLoad(gameManager);
         targetManager.gameObject.SetActive(false);
@@ -85,7 +84,7 @@ public class GameManager : MonoBehaviour
         if (gameManager.m_character == null)
             return;
 
-        if(character.GetSpeed() <= 0 && PlacementManager.resultingPlace == "")  // Character has come to a full stop!
+        if(character.GetSpeed() <= 0 || character.IsOnFallBox())  // Character has come to a full stop!
         {
             if(!targetManager.gameObject.activeInHierarchy)
             {
