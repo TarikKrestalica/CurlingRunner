@@ -12,7 +12,7 @@ public class Character : MonoBehaviour
     [SerializeField] float speed;
 
     // Jumping mechanic
-    [Range(0, 100)]
+    [Range(0, 200)]
     [SerializeField] float jumpPower;
     bool isJumping = false;
 
@@ -20,7 +20,8 @@ public class Character : MonoBehaviour
     [SerializeField] RectTransform groundCheckTransform;
     [SerializeField] LayerMask playerMask;
 
-    private string result = "ParticipationTrophy";
+    private string result = "Participation Trophy";
+    private bool isWalled = false;
 
     // To Dos
     // Sliding mechanic
@@ -30,7 +31,13 @@ public class Character : MonoBehaviour
         if (speed < 0)
             return;
 
-        this.transform.Translate(this.transform.right * speed * Time.deltaTime * Time.deltaTime);
+        if (this.transform.position.y < -50)
+        {
+            this.transform.Translate(this.transform.right * 0);
+            return;
+        }
+
+        this.transform.Translate(this.transform.right * speed * Time.deltaTime);
         animator.Play("Walk");
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -45,10 +52,13 @@ public class Character : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // Cast a ray straight down.
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up);
+        Debug.DrawRay(hit.point, -Vector2.up);
         // need to fix this
         if (IsGrounded() && isJumping == true)
         {
-            chest.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+            chest.AddForce(Vector2.up * jumpPower * 5, ForceMode2D.Impulse);
             isJumping = false;
         }
 
@@ -78,4 +88,16 @@ public class Character : MonoBehaviour
     {
         result = text;
     }
+
+    public void SetWalled(bool toggle)
+    {
+        isWalled = toggle;
+    }
+
+    public bool GetWalled()
+    {
+        return isWalled;
+    }
 }
+
+

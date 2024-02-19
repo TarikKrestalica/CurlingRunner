@@ -13,6 +13,7 @@ TagManager:
   - RedLevel
   - BullsEye
   - TargetManager
+  - Wall
   layers:
   - Default
   - TransparentFX

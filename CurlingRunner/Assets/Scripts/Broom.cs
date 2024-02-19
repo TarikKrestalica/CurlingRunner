@@ -6,8 +6,8 @@ using UnityEngine.EventSystems;
 public class Broom : MonoBehaviour
 {
     // Click on it to sweep
-    public void Sweep(BaseEventData data)
+    public void Sweep()
     {
-        GameManager.character.LoseSpeed(Time.deltaTime * 5);
+        GameManager.character.LoseSpeed(Time.deltaTime);
     }
 }

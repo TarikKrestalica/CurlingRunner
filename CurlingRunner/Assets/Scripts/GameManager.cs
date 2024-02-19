@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -81,6 +82,9 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (gameManager.m_character == null)
+            return;
+
         if(character.GetSpeed() <= 0 && PlacementManager.resultingPlace == "")  // Character has come to a full stop!
         {
             if(!targetManager.gameObject.activeInHierarchy)
@@ -92,4 +96,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void GoToScene(string name)
+    {
+        SceneManager.LoadScene(name);
+    }
 }
