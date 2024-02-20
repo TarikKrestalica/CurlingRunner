@@ -22,7 +22,7 @@ public class VelocityControl : MonoBehaviour
         if(collision.gameObject.tag == "Wall")
         {
             float startingSpeed = GameManager.character.GetStartingSpeed();
-            GameManager.character.LoseSpeed(Time.deltaTime * startingSpeed * 3);
+            GameManager.character.LoseSpeed(Time.deltaTime * startingSpeed * 3f);
         }
     }
 }

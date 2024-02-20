@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlacementManager : MonoBehaviour
 {
+    private void Start()
+    {
+        resultingPlace = "Participation Trophy";
+    }
     private static string resultingPlace = ""; 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -17,11 +21,11 @@ public class PlacementManager : MonoBehaviour
         {
             SetResultingPlace("Bronze");
         }
-        else if (collision.gameObject.tag == "RedLevel")
+        if (collision.gameObject.tag == "RedLevel")
         {
             SetResultingPlace("Silver");
         }
-        else if (collision.gameObject.tag == "BullsEye")
+        if (collision.gameObject.tag == "BullsEye")
         {
             SetResultingPlace("Gold");
         }
@@ -32,7 +36,7 @@ public class PlacementManager : MonoBehaviour
         if (GameManager.character.GetSpeed() < 0)
             return;
 
-        if (collision.gameObject.tag == "WhiteLevel")
+        if (collision.gameObject.tag == "BlueLevel")
         {
             SetResultingPlace("Participation Trophy");
         }

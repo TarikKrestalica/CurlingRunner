@@ -8,6 +8,6 @@ public class Broom : MonoBehaviour
     // Click on it to sweep
     public void Sweep()
     {
-        GameManager.character.LoseSpeed(Time.deltaTime * 6);
+        GameManager.character.LoseSpeed(Time.deltaTime * 75);
     }
 }

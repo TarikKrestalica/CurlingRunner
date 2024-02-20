@@ -53,7 +53,6 @@ public class Character : MonoBehaviour
     {
         if (IsGrounded() && isJumping == true)
         {
-            Debug.Log("Jumping");
             chest.AddForce(Vector2.up * jumpPower * 5, ForceMode2D.Impulse);
             isJumping = false;
         }

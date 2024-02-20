@@ -25,10 +25,6 @@ public class TargetManager : MonoBehaviour
     {
         endOfGame.SetActive(true);
         string result = PlacementManager.GetResultingPlace();
-        if(result == "")
-        {
-            result = "Participation Trophy";
-        }
         resultText.text = result;
         Sprite resultingTrophy = GetTrophy(result);
         SetImage(resultingTrophy);
